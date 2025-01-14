@@ -2,3 +2,8 @@ black[jupyter]
 flake8
 isort
 fastapi[standard]
+uvicorn
+SQLAlchemy
+psycopg2-binary
+python-dotenv
+alembic
