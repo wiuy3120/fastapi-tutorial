@@ -1,0 +1,4 @@
+black[jupyter]
+flake8
+isort
+fastapi[standard]
