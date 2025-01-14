@@ -5,7 +5,6 @@ from pathlib import Path
 import logging
 
 env_path = Path(".") / ".env"
-logging.warning(env_path)
 load_dotenv(dotenv_path=env_path)
 
 
