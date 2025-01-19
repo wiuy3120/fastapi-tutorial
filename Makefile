@@ -4,7 +4,7 @@ include ./colors.mk
 SHELL = /bin/bash
 PYTHON = python3.12
 VENV = venv
-BUILD_DIR = src playground
+BUILD_DIR = src
 
 # Python Virtual Environment
 .PHONY: venv
@@ -19,8 +19,12 @@ venv:
 .PHONY: style
 style:
 	@echo -e "$(COLOR_GREEN)Running code style checks...$(END_COLOR)"
+	
 	source ${VENV}/bin/activate && \
-	black ${BUILD_DIR} ; \
+	echo -e "$(COLOR_GREEN)Running isort...$(END_COLOR)"
 	isort ${BUILD_DIR} ; \
+	echo -e "$(COLOR_GREEN)Running black...$(END_COLOR)"
+	black ${BUILD_DIR} ; \
+	echo -e "$(COLOR_GREEN)Running flake8...$(END_COLOR)"
 	flake8 ${BUILD_DIR}
 
