@@ -1,7 +1,8 @@
 from fastapi import FastAPI
+
 from core.config import settings
-from db.session import engine
 from db import Base
+from db.session import engine
 
 
 def create_tables():
