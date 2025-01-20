@@ -21,10 +21,10 @@ style:
 	@echo -e "$(COLOR_GREEN)Running code style checks...$(END_COLOR)"
 	
 	source ${VENV}/bin/activate && \
-	echo -e "$(COLOR_GREEN)Running isort...$(END_COLOR)"
-	isort ${BUILD_DIR} ; \
 	echo -e "$(COLOR_GREEN)Running black...$(END_COLOR)"
 	black ${BUILD_DIR} ; \
+	echo -e "$(COLOR_GREEN)Running isort...$(END_COLOR)"
+	isort ${BUILD_DIR} ; \
 	echo -e "$(COLOR_GREEN)Running flake8...$(END_COLOR)"
 	flake8 ${BUILD_DIR}
 
