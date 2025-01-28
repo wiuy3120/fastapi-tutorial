@@ -3,7 +3,7 @@ include ./colors.mk
 .ONESHELL:
 SHELL = /bin/bash
 PYTHON = python3.12
-VENV = venv
+VENV = .venv
 BUILD_DIR = src
 
 # Python Virtual Environment
