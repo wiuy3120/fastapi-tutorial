@@ -7,3 +7,5 @@ SQLAlchemy
 psycopg2-binary
 python-dotenv
 alembic
+# hashing
+passlib[bcrypt]
