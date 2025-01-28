@@ -168,3 +168,6 @@ lc_venv/
 # IDE-specific files
 .vscode/
 .idea/
+
+# Test files
+test_*.py
