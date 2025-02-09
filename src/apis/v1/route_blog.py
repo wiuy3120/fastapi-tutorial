@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from db.repository.blog import (
     create_new_blog,
+    delete_blog,
     list_blog,
     retrieve_blog,
     update_blog,
@@ -46,7 +47,18 @@ def update_a_blog(id: int, blog: UpdateBlog, db: Session = Depends(get_db)):
     updated_blog = update_blog(id=id, blog=blog, author_id=1, db=db)
     if not updated_blog:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Blog with id {id} does not exist",
         )
     return updated_blog
+
+
+@router.delete("/blog/{id}")
+def delete_a_blog(id: int, db: Session = Depends(get_db)):
+    deleted = delete_blog(id=id, db=db)
+    if not deleted:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Blog with id {id} does not exist",
+        )
+    return f"Deleted blog with id {id}"

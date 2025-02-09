@@ -13,6 +13,17 @@ def create_new_blog(blog: CreateBlog, db: Session, author_id: int = 1):
     return new_blog
 
 
+def retrieve_blog(id: int, db: Session):
+    blog = db.query(Blog).filter(Blog.id == id).first()
+    return blog
+
+
+def list_blog(db: Session):
+    # blogs = db.query(Blog).filter(Blog.is_active.is_(True)).all()
+    blogs = db.query(Blog).filter(Blog.is_active == true()).all()
+    return blogs
+
+
 def update_blog(id: int, blog: UpdateBlog, author_id: int, db: Session):
     existing_blog = db.query(Blog).filter(Blog.id == id).first()
     if not existing_blog:
@@ -23,12 +34,10 @@ def update_blog(id: int, blog: UpdateBlog, author_id: int, db: Session):
     return existing_blog
 
 
-def retrieve_blog(id: int, db: Session):
+def delete_blog(id: int, db: Session):
     blog = db.query(Blog).filter(Blog.id == id).first()
-    return blog
-
-
-def list_blog(db: Session):
-    # blogs = db.query(Blog).filter(Blog.is_active.is_(True)).all()
-    blogs = db.query(Blog).filter(Blog.is_active == true()).all()
-    return blogs
+    if not blog:
+        return False
+    db.delete(blog)
+    db.commit()
+    return True
