@@ -1,7 +1,9 @@
+from datetime import datetime
+
 from pydantic import BaseModel, model_validator
 
 
-class BlogCreate(BaseModel):
+class CreateBlog(BaseModel):
     title: str
     slug: str
     content: str | None = None
@@ -18,11 +20,16 @@ class BlogCreate(BaseModel):
         return data
 
 
+class UpdateBlog(CreateBlog):
+    pass
+
+
 class ShowBlog(BaseModel):
     id: int
     title: str
     content: str | None
     author_id: int
+    created_at: datetime
     is_active: bool
 
     class Config:

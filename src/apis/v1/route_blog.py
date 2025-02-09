@@ -1,9 +1,16 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from db.repository.blog import create_new_blog, retrieve_blog
+from db.repository.blog import (
+    create_new_blog,
+    list_blog,
+    retrieve_blog,
+    update_blog,
+)
 from db.session import get_db
-from schemas.blog import BlogCreate, ShowBlog
+from schemas.blog import CreateBlog, ShowBlog, UpdateBlog
 
 router = APIRouter()
 
@@ -19,9 +26,27 @@ def get_blog(id: int, db: Session = Depends(get_db)):
     return blog
 
 
+@router.get("/blogs", response_model=List[ShowBlog])
+def get_all_blogs(db: Session = Depends(get_db)):
+    blogs = list_blog(db=db)
+    return blogs
+
+
 @router.post(
     "/blogs", response_model=ShowBlog, status_code=status.HTTP_201_CREATED
 )
-def create_blog(blog: BlogCreate, db: Session = Depends(get_db)):
-    new_blog = create_new_blog(blog=blog, db=db)
+def create_blog(blog: CreateBlog, db: Session = Depends(get_db)):
+
+    new_blog = create_new_blog(blog=blog, db=db, author_id=1)
     return new_blog
+
+
+@router.put("/blog/{id}", response_model=ShowBlog)
+def update_a_blog(id: int, blog: UpdateBlog, db: Session = Depends(get_db)):
+    updated_blog = update_blog(id=id, blog=blog, author_id=1, db=db)
+    if not updated_blog:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Blog with id {id} does not exist",
+        )
+    return updated_blog
