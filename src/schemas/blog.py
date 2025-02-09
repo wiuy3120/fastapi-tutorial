@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, ConfigDict, model_validator
 
 
 class CreateBlog(BaseModel):
@@ -32,5 +32,4 @@ class ShowBlog(BaseModel):
     created_at: datetime
     is_active: bool
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

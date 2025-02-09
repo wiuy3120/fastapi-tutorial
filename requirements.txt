@@ -9,3 +9,5 @@ python-dotenv
 alembic
 # hashing
 passlib[bcrypt]
+pytest
+httpx

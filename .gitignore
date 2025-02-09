@@ -171,3 +171,6 @@ lc_venv/
 
 # Test files
 test_*.py
+
+# Unit Test DB File
+src/test_db.db

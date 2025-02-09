@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
 
 # properties required during user creation
@@ -12,5 +12,4 @@ class ShowUser(BaseModel):
     email: EmailStr
     is_active: bool
 
-    class Config:  # tells pydantic to convert even non dict obj to json
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
