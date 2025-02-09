@@ -5,7 +5,7 @@ from pydantic import BaseModel, ConfigDict, model_validator
 
 class CreateBlog(BaseModel):
     title: str
-    slug: str
+    slug: str = ""
     content: str | None = None
     # author_id: int
 
