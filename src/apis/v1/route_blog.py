@@ -37,7 +37,6 @@ def get_all_blogs(db: Session = Depends(get_db)):
     "/blogs", response_model=ShowBlog, status_code=status.HTTP_201_CREATED
 )
 def create_blog(blog: CreateBlog, db: Session = Depends(get_db)):
-
     new_blog = create_new_blog(blog=blog, db=db, author_id=1)
     return new_blog
 
